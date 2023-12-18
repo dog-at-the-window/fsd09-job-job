@@ -1,0 +1,48 @@
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>User Directory Page</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <!-- Bootstrap 5.3.2 -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body>
+<div class="container">
+    <h3>User Directory</h3>
+    <hr>
+
+    <!-- Add a button -->
+    <a th:href="@{/user/showFormForAdd}" class="btn btn-primary btn-sm mb-3">Add User</a>
+    <a th:href="@{/home}" class="btn btn-danger btn-sm mb-3">Logout</a>
+    <table class="table table-bordered table-striped">
+        <thead class="table">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Password</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="tmpUser : ${users}">
+            <td th:text="${tmpUser.name}"></td>
+            <td th:text="${tmpUser.email}"></td>
+            <td th:text="${tmpUser.password}"></td>
+            <td>
+                <!-- Add update button/link -->
+                <a th:href="@{/user/showFormForUpdate(userId=${tmpUser.id})}" class="btn btn-success btn-sm">Update</a>
+                <!-- Add delete button/link -->
+                <a th:href="@{/user/delete(userId=${tmpUser.id})}" class="btn btn-danger btn-sm"
+                   onclick="if(!(confirm('Are you sure you want to delete the user?'))) return false">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+
+</html>
